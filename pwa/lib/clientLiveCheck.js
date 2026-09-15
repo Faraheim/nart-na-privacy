@@ -49,21 +49,26 @@ export async function runClientLiveCheck({
   const polygons = {};
   const byId = uniqueCitiesFrom(kommunerDoc);
   const fetchPoly = fetchOmrade || fetchKommuneOmrade;
-  for (const id of query.filterCities) {
-    const row = byId.find((c) => c.id === id);
-    const nr = row?.kommuneNr?.[0];
-    if (!nr) continue;
-    try {
-      polygons[id] = await fetchPoly(nr);
-    } catch {
-      /* bbox-only keep for this kommune */
-    }
-  }
+  const omradeIds = query.filterCities.slice(0, 8);
+  await Promise.all(
+    omradeIds.map(async (id) => {
+      const row = byId.find((c) => c.id === id);
+      const nr = row?.kommuneNr?.[0];
+      if (!nr) return;
+      try {
+        polygons[id] = await fetchPoly(nr);
+      } catch {
+        /* bbox-only keep for this kommune */
+      }
+    }),
+  );
   query.polygons = polygons;
+  query.uniqueCities = () => uniqueCitiesFrom(kommunerDoc);
+  query.cityForPoint = cityForPointFromPolygons(polygons);
 
   bindLiveGeo({
-    cityForPoint: cityForPointFromPolygons(polygons),
-    uniqueCities: () => uniqueCitiesFrom(kommunerDoc),
+    cityForPoint: query.cityForPoint,
+    uniqueCities: query.uniqueCities,
   });
 
   const fylkeNrByCity = Object.fromEntries(uniqueCitiesFrom(kommunerDoc).map((c) => [c.id, c.fylkeNr]));

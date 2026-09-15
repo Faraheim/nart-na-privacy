@@ -1,4 +1,4 @@
-const CACHE = 'nart-na-pwa-v3';
+const CACHE = 'nart-na-pwa-v4';
 const SHELL = ['/', '/index.html', '/styles.css', '/app.js', '/manifest.webmanifest', '/icon.svg'];
 
 self.addEventListener('install', (event) => {

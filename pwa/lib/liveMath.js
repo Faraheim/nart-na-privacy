@@ -67,3 +67,29 @@ export function abortTimeout(ms) {
   setTimeout(() => c.abort(), ms);
   return c.signal;
 }
+
+function osloDayHour(ms) {
+  const s = new Date(ms).toLocaleString("sv-SE", { timeZone: "Europe/Oslo" });
+  return { day: s.slice(0, 10), hour: Number(s.slice(11, 13)) };
+}
+
+/** happening = all live rows. tonight = same Oslo day, from 17:00. places = drop events. */
+export function filterLiveByMode(live, mode, now = Date.now()) {
+  const places = live?.places || [];
+  const events = live?.events || [];
+  if (mode === "places") return { ...live, places, events: [] };
+  if (mode === "tonight") {
+    const today = osloDayHour(now).day;
+    return {
+      ...live,
+      places,
+      events: events.filter((e) => {
+        const t = Date.parse(e.startsAt);
+        if (!Number.isFinite(t)) return false;
+        const p = osloDayHour(t);
+        return p.day === today && p.hour >= 17;
+      }),
+    };
+  }
+  return live;
+}

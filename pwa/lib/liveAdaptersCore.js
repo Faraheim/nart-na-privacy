@@ -30,12 +30,81 @@ export function bindLiveGeo({ cityForPoint, uniqueCities } = {}) {
   if (typeof uniqueCities === "function") _uniqueCities = uniqueCities;
 }
 
-function cityForPoint(lat, lon) {
+function resolveCityForPoint(lat, lon, query) {
+  if (typeof query?.cityForPoint === "function") return query.cityForPoint(lat, lon);
   return _cityForPoint(lat, lon);
 }
 
-function uniqueCities() {
+function resolveUniqueCities(query) {
+  if (typeof query?.uniqueCities === "function") return query.uniqueCities();
   return _uniqueCities();
+}
+
+function cityForPoint(lat, lon, query) {
+  return resolveCityForPoint(lat, lon, query);
+}
+
+function uniqueCities(query) {
+  return resolveUniqueCities(query);
+}
+
+function pointInBbox(lat, lon, bbox) {
+  if (!bbox) return false;
+  return lat >= bbox.south && lat <= bbox.north && lon >= bbox.west && lon <= bbox.east;
+}
+
+export function keepPoint(lat, lon, query) {
+  if (!Number.isFinite(lat) || !Number.isFinite(lon)) return false;
+  const placeCities = query.filterCities || (!query.near ? query.cities : []) || [];
+  let inPlace = false;
+  if (placeCities.length) {
+    const id = cityForPoint(lat, lon, query);
+    if (id && placeCities.includes(id)) inPlace = true;
+    else if (query.polygons) {
+      for (const cid of placeCities) {
+        if (pointInOmrade(lon, lat, query.polygons[cid])) {
+          inPlace = true;
+          break;
+        }
+      }
+    }
+    if (!inPlace) {
+      const rows = uniqueCities(query);
+      for (const cid of placeCities) {
+        const row = rows.find((c) => c.id === cid);
+        if (pointInBbox(lat, lon, row?.bbox)) {
+          inPlace = true;
+          break;
+        }
+      }
+    }
+  }
+  let inNear = false;
+  if (query.near) {
+    inNear = haversineKm(query.near.lat, query.near.lon, lat, lon) <= (query.near.km || 30);
+  }
+  if (query.near && placeCities.length) return inPlace || inNear;
+  if (query.near) return inNear;
+  if (placeCities.length) return inPlace;
+  const cities = query.cities || [];
+  if (!cities.length) return true;
+  const id = cityForPoint(lat, lon, query);
+  return Boolean(id && cities.includes(id));
+}
+
+function queryBbox(query) {
+  if (query.near) {
+    const b = bboxFromRadiusKm(query.near.lat, query.near.lon, query.near.km || 30);
+    return { south: b.minLat, west: b.minLon, north: b.maxLat, east: b.maxLon };
+  }
+  const boxes = uniqueCities(query).filter((c) => (query.cities || []).includes(c.id));
+  if (!boxes.length) return null;
+  return {
+    south: Math.min(...boxes.map((c) => c.bbox.south)),
+    west: Math.min(...boxes.map((c) => c.bbox.west)),
+    north: Math.max(...boxes.map((c) => c.bbox.north)),
+    east: Math.max(...boxes.map((c) => c.bbox.east)),
+  };
 }
 
 function hid(sourceId, kind, externalId) {
@@ -52,50 +121,6 @@ async function fetchJson(url, extra = {}) {
   });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   return res.json();
-}
-
-function keepPoint(lat, lon, query) {
-  if (!Number.isFinite(lat) || !Number.isFinite(lon)) return false;
-  const placeCities = query.filterCities || (!query.near ? query.cities : []) || [];
-  let inPlace = false;
-  if (placeCities.length) {
-    const id = cityForPoint(lat, lon);
-    if (id && placeCities.includes(id)) inPlace = true;
-    else if (query.polygons) {
-      for (const cid of placeCities) {
-        if (pointInOmrade(lon, lat, query.polygons[cid])) {
-          inPlace = true;
-          break;
-        }
-      }
-    }
-  }
-  let inNear = false;
-  if (query.near) {
-    inNear = haversineKm(query.near.lat, query.near.lon, lat, lon) <= (query.near.km || 30);
-  }
-  if (query.near && placeCities.length) return inPlace || inNear;
-  if (query.near) return inNear;
-  if (placeCities.length) return inPlace;
-  const cities = query.cities || [];
-  if (!cities.length) return true;
-  const id = cityForPoint(lat, lon);
-  return Boolean(id && cities.includes(id));
-}
-
-function queryBbox(query) {
-  if (query.near) {
-    const b = bboxFromRadiusKm(query.near.lat, query.near.lon, query.near.km || 30);
-    return { south: b.minLat, west: b.minLon, north: b.maxLat, east: b.maxLon };
-  }
-  const boxes = uniqueCities().filter((c) => (query.cities || []).includes(c.id));
-  if (!boxes.length) return null;
-  return {
-    south: Math.min(...boxes.map((c) => c.bbox.south)),
-    west: Math.min(...boxes.map((c) => c.bbox.west)),
-    north: Math.max(...boxes.map((c) => c.bbox.north)),
-    east: Math.max(...boxes.map((c) => c.bbox.east)),
-  };
 }
 
 const OSM_FOR = {
@@ -255,7 +280,7 @@ async function overpass({ row, query }) {
 
 function cityLabels(query) {
   const want = new Set(query.cities || []);
-  const labels = uniqueCities()
+  const labels = uniqueCities(query)
     .filter((c) => want.has(c.id))
     .map((c) => c.label);
   return [...new Set(labels)].slice(0, 8);

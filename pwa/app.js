@@ -1,5 +1,6 @@
 import { runClientLiveCheck } from './lib/clientLiveCheck.js';
 import { catalogFromKommuner } from './lib/clientScope.js';
+import { filterLiveByMode } from './lib/liveMath.js';
 
 const citiesSel = new Set();
 const groupsSel = new Set();
@@ -371,17 +372,18 @@ async function openPin(kind, id) {
 
 async function load() {
   if (!ready()) {
-    statusEl.textContent = 'Velg fylke eller kommune og tema. Vi henter bare det.';
+    statusEl.textContent = 'Velg fylke, kommune eller Rundt meg — og tema. Vi henter bare det.';
     listSummary.textContent = 'Forslag';
-    listEl.innerHTML = '<div class="empty">Ingenting lastes ennå. Velg minst én by og ett tema.</div>';
+    listEl.innerHTML = '<div class="empty">Ingenting lastes ennå. Velg tema og sted, eller Rundt meg 30 km.</div>';
     if (layer) layer.clearLayers();
     closeSheet();
     return;
   }
   statusEl.textContent = 'Sjekker kartlagte kilder…';
   try {
-    const live = await postLiveCheck(lastLiveForce).catch(() => null);
+    const raw = await postLiveCheck(lastLiveForce);
     lastLiveForce = false;
+    const live = filterLiveByMode(raw, mode);
     const features = live ? liveToFeatures(live) : [];
     const items = [
       ...(live?.events || []).map((e) => ({
