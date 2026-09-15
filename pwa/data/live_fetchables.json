@@ -1,0 +1,186 @@
+{
+  "version": 1,
+  "updatedAt": "2026-09-15T17:32:44.312Z",
+  "rows": [
+    {
+      "id": "filmsentret-charlie",
+      "hubId": "filmsentret-charlie",
+      "adapterKind": "http_json",
+      "urlTemplate": "https://cw-data-api.dxn.no/v1/sites/site175a/basic_events",
+      "geo": {
+        "type": "kommune",
+        "cityIds": [
+          "porsgrunn"
+        ]
+      },
+      "activityIds": [
+        "cinema"
+      ],
+      "layer": "place_event",
+      "gate": "live",
+      "timeoutMs": 20000
+    },
+    {
+      "id": "hoopla",
+      "hubId": "hoopla",
+      "adapterKind": "http_json",
+      "urlTemplate": "https://api.hoopla.no/api/public/v3.1/events?c={cityName}",
+      "geo": {
+        "type": "kommune_c"
+      },
+      "activityIds": [
+        "concert",
+        "dj",
+        "family_show",
+        "festival",
+        "gaming",
+        "jam",
+        "standup",
+        "theatre"
+      ],
+      "layer": "event",
+      "gate": "live",
+      "timeoutMs": 20000
+    },
+    {
+      "id": "ibsenhuset",
+      "hubId": "ibsenhuset",
+      "adapterKind": "wp_rest",
+      "urlTemplate": "https://www.ibsenhuset.no/wp-json/wp/v2/event",
+      "geo": {
+        "type": "kommune",
+        "cityIds": [
+          "skien"
+        ]
+      },
+      "activityIds": [
+        "concert",
+        "family_show",
+        "musical",
+        "standup",
+        "talk",
+        "theatre"
+      ],
+      "layer": "event",
+      "gate": "live",
+      "timeoutMs": 20000
+    },
+    {
+      "id": "odeon-kino",
+      "hubId": "odeon-kino",
+      "adapterKind": "http_json",
+      "urlTemplate": "https://services.cinema-api.com/show/stripped/no/1/1024/?CountryAlias=no&CityAlias={alias}&Channel=Web",
+      "geo": {
+        "type": "chain_cities",
+        "cityIds": [
+          "skien",
+          "oslo",
+          "baerum-3201",
+          "sandnes-1108",
+          "lillestrom-3205",
+          "moss-3103",
+          "stavanger-1103",
+          "alesund-1508",
+          "oygarden-4626"
+        ],
+        "aliases": {
+          "skien": "SK",
+          "oslo": "OS",
+          "baerum-3201": "SN",
+          "sandnes-1108": "SA",
+          "lillestrom-3205": "LI",
+          "moss-3103": "MO",
+          "stavanger-1103": "ST",
+          "alesund-1508": "AL",
+          "oygarden-4626": "SO"
+        }
+      },
+      "activityIds": [
+        "cinema"
+      ],
+      "layer": "place_event",
+      "gate": "live",
+      "timeoutMs": 20000
+    },
+    {
+      "id": "osm-overpass",
+      "hubId": "osm-overpass",
+      "adapterKind": "overpass",
+      "urlTemplate": "https://overpass-api.de/api/interpreter",
+      "geo": {
+        "type": "bbox"
+      },
+      "activityIds": [
+        "athletics",
+        "badminton",
+        "bandy",
+        "basketball",
+        "beach",
+        "bowling",
+        "cafe",
+        "camping",
+        "cinema",
+        "climbing",
+        "community",
+        "cycling_sport",
+        "floorball",
+        "food_hall",
+        "football",
+        "frisbee",
+        "golf",
+        "gym",
+        "handball",
+        "harbour_bath",
+        "hike",
+        "ice_hockey",
+        "ice_rink",
+        "ice_skate_out",
+        "library",
+        "mini_golf",
+        "museum",
+        "nightlife",
+        "padel",
+        "park",
+        "parkour",
+        "picnic",
+        "playground",
+        "restaurant",
+        "roller",
+        "sauna",
+        "skateboard",
+        "ski",
+        "sled",
+        "swim_pool",
+        "table_tennis",
+        "tennis",
+        "volleyball"
+      ],
+      "layer": "place",
+      "gate": "live",
+      "timeoutMs": 20000
+    },
+    {
+      "id": "ticketmaster",
+      "hubId": "ticketmaster",
+      "adapterKind": "http_json",
+      "urlTemplate": "https://app.ticketmaster.com/discovery/v2/events.json",
+      "geo": {
+        "type": "bbox"
+      },
+      "activityIds": [
+        "circus",
+        "concert",
+        "fair",
+        "family_show",
+        "festival",
+        "musical",
+        "opera_ballet",
+        "standup",
+        "theatre"
+      ],
+      "layer": "event",
+      "gate": "live",
+      "timeoutMs": 20000
+    }
+  ]
+}

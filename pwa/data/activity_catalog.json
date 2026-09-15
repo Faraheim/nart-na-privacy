@@ -1,0 +1,215 @@
+{
+  "version": 2,
+  "cities": ["skien", "porsgrunn", "oslo"],
+  "updatedAt": "2026-09-13",
+  "purpose": "Things people do in claimed cities. Oslo calendar taxonomy taught extra types. Not invented events.",
+  "route": "max-info: all legal calendars + submit + Facebook deep-link + Page-oauth later",
+  "groups": [
+    {
+      "id": "kids_family",
+      "label": "Barn og familie",
+      "items": [
+        { "id": "playground", "label": "Lekeplass" },
+        { "id": "indoor_play", "label": "Innendørs lekeland / ballbinge" },
+        { "id": "family_show", "label": "Familieforestilling / barneteater" },
+        { "id": "storytime", "label": "Eventyrstund / baby-sang" },
+        { "id": "kids_workshop", "label": "Barneverksted / hobbykurs" },
+        { "id": "youth_club", "label": "Ungdomsklubb / fritidsklubb" },
+        { "id": "science_center", "label": "Vitensenter / teknisk museum" }
+      ]
+    },
+    {
+      "id": "ball_team",
+      "label": "Ball og lagidrett",
+      "items": [
+        { "id": "football", "label": "Fotball (kamp / trening / cup)" },
+        { "id": "handball", "label": "Håndball" },
+        { "id": "basketball", "label": "Basket" },
+        { "id": "volleyball", "label": "Volleyball / sandvolleyball" },
+        { "id": "floorball", "label": "Innebandy" },
+        { "id": "ice_hockey", "label": "Ishockey" },
+        { "id": "bandy", "label": "Bandy" },
+        { "id": "tennis", "label": "Tennis" },
+        { "id": "padel", "label": "Padel" },
+        { "id": "badminton", "label": "Badminton" },
+        { "id": "table_tennis", "label": "Bordtennis" }
+      ]
+    },
+    {
+      "id": "individual_sport",
+      "label": "Individuell idrett og trening",
+      "items": [
+        { "id": "gym", "label": "Treningssenter / gruppetime" },
+        { "id": "athletics", "label": "Friidrett" },
+        { "id": "martial", "label": "Kampsport (judo, karate, boksing, …)" },
+        { "id": "gymnastics", "label": "Turn / gymnastikk" },
+        { "id": "dance_sport", "label": "Dans (trening / oppvisning)" },
+        { "id": "climbing", "label": "Klatring / boulder" },
+        { "id": "bowling", "label": "Bowling" },
+        { "id": "golf", "label": "Golf" },
+        { "id": "shooting", "label": "Skyting" },
+        { "id": "archery", "label": "Bueskyting" },
+        { "id": "cycling_sport", "label": "Sykkelritt / BMX / pumptrack" },
+        { "id": "running", "label": "Løp / mosjonsløp" },
+        { "id": "parkour", "label": "Parkour / hinderløype" }
+      ]
+    },
+    {
+      "id": "horse_animal",
+      "label": "Hest og dyr",
+      "items": [
+        { "id": "riding", "label": "Hesteridning / rideskole" },
+        { "id": "horse_show", "label": "Stevne / dressur / sprang" },
+        { "id": "stable_open", "label": "Åpen stall / ponniklubb" },
+        { "id": "dog_sport", "label": "Hundesport / agility" },
+        { "id": "farm_visit", "label": "Gårdsbesøk / 4H" }
+      ]
+    },
+    {
+      "id": "water",
+      "label": "Vann",
+      "items": [
+        { "id": "swim_pool", "label": "Svømmehall / badeland" },
+        { "id": "beach", "label": "Utebad / badestrand" },
+        { "id": "sauna", "label": "Badstue" },
+        { "id": "kayak", "label": "Kajakk / kano / padling" },
+        { "id": "rowing", "label": "Roing" },
+        { "id": "sailing", "label": "Seiling / jolle" },
+        { "id": "fishing", "label": "Fiske" },
+        { "id": "dive", "label": "Dykking" },
+        { "id": "harbour_bath", "label": "Sjøbad / havnebasseng" },
+        { "id": "ice_bath", "label": "Isbading / vinterbad" }
+      ]
+    },
+    {
+      "id": "outdoor",
+      "label": "Natur og ute",
+      "items": [
+        { "id": "hike", "label": "Tur / turstart" },
+        { "id": "park", "label": "Park / bypark" },
+        { "id": "picnic", "label": "Picnic / grillplass" },
+        { "id": "ski", "label": "Ski / langrenn / alpint" },
+        { "id": "sled", "label": "Aking / kjelke" },
+        { "id": "ice_skate_out", "label": "Utebane / naturis" },
+        { "id": "orienteering", "label": "Orientering" },
+        { "id": "frisbee", "label": "Frisbeegolf" },
+        { "id": "camping", "label": "Camping / bålplass" }
+      ]
+    },
+    {
+      "id": "wheels_ice",
+      "label": "Hjul og is",
+      "items": [
+        { "id": "skateboard", "label": "Skateboard / skatepark" },
+        { "id": "roller", "label": "Rulleskøyter / inline" },
+        { "id": "ice_rink", "label": "Ishall / skøytebane" },
+        { "id": "gokart", "label": "Gokart" }
+      ]
+    },
+    {
+      "id": "air_action",
+      "label": "Luft og action",
+      "items": [
+        { "id": "skydive", "label": "Fallskjerm" },
+        { "id": "flight", "label": "Flytur / luftfart" },
+        { "id": "escape", "label": "Escape room" },
+        { "id": "laser", "label": "Laser game / paintball" },
+        { "id": "mini_golf", "label": "Minigolf" }
+      ]
+    },
+    {
+      "id": "stage",
+      "label": "Scene og kultur",
+      "items": [
+        { "id": "theatre", "label": "Teater" },
+        { "id": "musical", "label": "Musikal / revy" },
+        { "id": "standup", "label": "Stand-up" },
+        { "id": "talk", "label": "Foredrag / samtale" },
+        { "id": "literature", "label": "Litteratur / bokbad" },
+        { "id": "poetry", "label": "Poesi / opplesning" },
+        { "id": "museum", "label": "Museum / utstilling" },
+        { "id": "gallery", "label": "Galleri / kunst" },
+        { "id": "heritage", "label": "Kulturminne / byvandring" },
+        { "id": "opera_ballet", "label": "Opera / ballett" },
+        { "id": "circus", "label": "Sirkus / samtidsirkus" },
+        { "id": "street_art", "label": "Gatekunst / muralvandring" },
+        { "id": "guided_tour", "label": "Omvisning" }
+      ]
+    },
+    {
+      "id": "screen",
+      "label": "Film",
+      "items": [
+        { "id": "cinema", "label": "Kino (ny film)" },
+        { "id": "film_club", "label": "Filmklubb / visning" },
+        { "id": "outdoor_cinema", "label": "Utendørs kino" }
+      ]
+    },
+    {
+      "id": "music_night",
+      "label": "Musikk og kveld",
+      "items": [
+        { "id": "concert", "label": "Konsert" },
+        { "id": "festival", "label": "Festival" },
+        { "id": "dj", "label": "DJ / klubb / afterparty" },
+        { "id": "jam", "label": "Jam / open mic" },
+        { "id": "choir", "label": "Kor / korps / konsert" },
+        { "id": "nightlife", "label": "Pub / uteliv" },
+        { "id": "quiz", "label": "Quiz" },
+        { "id": "bingo", "label": "Bingo" },
+        { "id": "karaoke", "label": "Karaoke" }
+      ]
+    },
+    {
+      "id": "food",
+      "label": "Mat og drikke",
+      "items": [
+        { "id": "cafe", "label": "Café" },
+        { "id": "restaurant", "label": "Restaurant / middag" },
+        { "id": "market_food", "label": "Matmarked / street food" },
+        { "id": "brewery", "label": "Bryggeri / smaking" },
+        { "id": "farmers_market", "label": "Bondens marked" },
+        { "id": "food_hall", "label": "Mathall / food court" }
+      ]
+    },
+    {
+      "id": "civic",
+      "label": "Samfunn og dugnad",
+      "items": [
+        { "id": "library", "label": "Bibliotek" },
+        { "id": "community", "label": "Samfunnshus / forening" },
+        { "id": "volunteer", "label": "Dugnad / frivillig" },
+        { "id": "political", "label": "Folkemøte / debatt" },
+        { "id": "market_civic", "label": "Torv / loppemarked" },
+        { "id": "pride_or_parade", "label": "Parade / tog / merkedag" },
+        { "id": "neighbourhood_fest", "label": "Bydelsfest / grendefest" }
+      ]
+    },
+    {
+      "id": "learn",
+      "label": "Læring og kurs",
+      "items": [
+        { "id": "course", "label": "Kurs (voksenopplæring / folkeuniversitet)" },
+        { "id": "lecture", "label": "Forelesning / åpent universitet" },
+        { "id": "workshop_adult", "label": "Verksted / maker" },
+        { "id": "language", "label": "Språkkafé" },
+        { "id": "gaming", "label": "Gaming / e-sport / LAN" },
+        { "id": "boardgame", "label": "Brettspillkafé" },
+        { "id": "student", "label": "Studentarrangement" }
+      ]
+    },
+    {
+      "id": "seasonal",
+      "label": "Sesong og byliv",
+      "items": [
+        { "id": "christmas", "label": "Julemarked" },
+        { "id": "17mai", "label": "17. mai / nasjonaldag" },
+        { "id": "newyear", "label": "Nyttår / fyrverkeri" },
+        { "id": "fair", "label": "Messe / utstillingshall" },
+        { "id": "sport_cup", "label": "Cup / stevnehelg" },
+        { "id": "kulturnatt", "label": "Kulturnatt" },
+        { "id": "record_fair", "label": "Plate- / samlemesse" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="nb">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#2c261f" />
+    <title>Nært Nå</title>
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./icon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="top">
+      <div>
+        <p class="eyebrow">Norge · kommune for kommune</p>
+        <h1>Nært Nå</h1>
+        <p class="lead" id="status">Velg fylke eller kommune og tema. Vi henter bare det.</p>
+      </div>
+    </header>
+
+    <aside id="filters" class="filters">
+      <p class="hint">Ingenting lastes før du velger. Fylke først, så kommune — ikke 357 chips.</p>
+      <div class="dd-row">
+        <div class="dd" id="cityDd">
+          <button type="button" class="dd-btn" id="cityBtn" aria-expanded="false">Sted ▾</button>
+          <div class="dd-menu" id="cityMenu" hidden></div>
+        </div>
+        <div class="dd" id="groupDd">
+          <button type="button" class="dd-btn" id="groupBtn" aria-expanded="false">Tema ▾</button>
+          <div class="dd-menu" id="groupMenu" hidden></div>
+        </div>
+        <div class="dd" id="modeDd">
+          <button type="button" class="dd-btn" id="modeBtn" aria-expanded="false">Vis: Program ▾</button>
+          <div class="dd-menu" id="modeMenu" hidden></div>
+        </div>
+        <button type="button" class="dd-btn" id="nearBtn">Rundt meg 30 km</button>
+        <button type="button" class="dd-btn" id="refreshBtn">Sjekk på nytt</button>
+      </div>
+    </aside>
+
+    <main>
+      <section id="listWrap" class="list-wrap">
+        <details id="listFold">
+          <summary id="listSummary">Forslag</summary>
+          <section id="list" class="list" aria-live="polite"></section>
+        </details>
+      </section>
+      <section id="map" class="map" aria-label="Kart"></section>
+    </main>
+
+    <div id="sheetBackdrop" class="sheet-backdrop" hidden></div>
+    <aside id="sheet" class="sheet" hidden>
+      <div class="sheet-head">
+        <p class="kind" id="sheetKind"></p>
+        <button type="button" class="ghost" id="sheetClose" aria-label="Lukk">Lukk</button>
+      </div>
+      <h2 id="sheetTitle"></h2>
+      <p class="meta" id="sheetMeta"></p>
+      <div id="sheetLinks" class="sheet-links"></div>
+      <div id="sheetProgram" class="program"></div>
+    </aside>
+
+    <footer>© OpenStreetMap-bidragsytere · Offentlige kilder, ingen Facebook-scrape</footer>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="./app.js" type="module"></script>
+  </body>
+</html>

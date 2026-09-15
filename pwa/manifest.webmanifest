@@ -1,0 +1,13 @@
+{
+  "name": "Nært Nå",
+  "short_name": "Nært Nå",
+  "description": "Finn noe å gjøre i Norge, kommune for kommune.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f4efe6",
+  "theme_color": "#2c261f",
+  "lang": "nb",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
